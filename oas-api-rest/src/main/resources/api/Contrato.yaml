@@ -1,0 +1,1276 @@
+openapi: 3.0.4
+info:
+  title: pharmacy
+  description: API para administrar una farmacia
+  version: 1.3.0
+  contact:
+    name: RND
+    email: l22140765@queretaro.tecnm.mx
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+
+servers:
+  - url: http://localhost:8080/api/v1
+    description: Ambiente local
+  - url: http://10.124.63.12:8080/api/v1
+    description: Ambiente de pruebas
+
+tags:
+  - name: pharmacys
+    description: "Administra cada una de las sucursales"
+  - name: products
+    description: "Administra los productos y sus cantidades"
+  - name: employes
+    description: "Administra los empleados" 
+  - name: sales
+    description: "Administrador de ventas"
+
+paths:
+  /pharmacys:
+    get:
+      summary: Obtener información de todas las farmacias
+      description: Obtiene todas las farmacias
+      operationId: getPharmacys
+      tags:
+        - pharmacys
+      responses:
+        '200':
+          $ref: '#/components/responses/Success200Pharmacys'
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+    post:
+      summary: Crear nueva farmacia
+      description: Crear una nueva sucursal de nuestra cadena farmacias
+      operationId: createPharmacy
+      tags:
+        - pharmacys
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pharmacy'
+      responses:
+        '201':
+          $ref: '#/components/responses/Success201PharmacyCreated'
+        '400':
+          $ref: '#/components/responses/Error400' 
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+  /pharmacys/{idPharmacy}:
+    get:
+      summary: Obtiene una farmacia por su ID
+      description: Obtiene una farmacia en especifico
+      operationId: getPharmacy
+      tags:
+        - pharmacys
+      parameters:
+        - name: idPharmacy
+          in: path
+          description: ID de la sucursal a obtener
+          required: true
+          schema:
+            type: integer
+          example: 123
+      responses:
+        '200':
+          $ref: '#/components/responses/Success200Pharmacy'
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+    put:
+      summary: Actualizar datos de una farmacia
+      description: Actualizar los datos de una unica farmacia
+      operationId: updatePharmacy
+      tags:
+        - pharmacys
+      parameters:
+        - name: idPharmacy
+          in: path
+          description: ID de la sucursal a actualizar
+          required: true
+          schema:
+            type: integer
+          example: 123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pharmacy'
+      responses:
+        '201':
+          $ref: '#/components/responses/Success201PharmacyUpdated'
+        '400':
+          $ref: '#/components/responses/Error400' 
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+    patch:
+      summary: Actualizar un dato de una farmacia
+      description: Actualizar un unico dato de una unica farmacia
+      operationId: patchPharmacy
+      tags:
+        - pharmacys
+      parameters:
+        - name: idPharmacy
+          in: path
+          description: ID de la sucursal a actualizar
+          required: true
+          schema:
+            type: integer
+          example: 123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pharmacyPatch'
+            example:
+              name: "Farmacia la cruz"
+              address: "Calle La luz #13" 
+      responses:
+        '201':
+          $ref: '#/components/responses/Success201PharmacyPatched'
+        '400':
+          $ref: '#/components/responses/Error400' 
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+    delete:
+      summary: Eliminar sucursal
+      description: Elimina una sucursal de farmacia
+      operationId: deletePharmacy
+      tags:
+        - pharmacys
+      parameters:
+        - name: idPharmacy
+          in: path
+          description: ID de sucursal a eliminar
+          required: true
+          schema:
+            type: integer
+            format: int32
+          example: 123
+      responses:
+        '200':
+          $ref: '#/components/responses/Success200PharmacyDeleted'
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+  /products:
+    get:
+      summary: Obtener información de todos los productos
+      description: Obtiene todos los productos
+      operationId: getProducts
+      tags:
+        - products
+      responses:
+        '200':
+          $ref: '#/components/responses/Success200Products'
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+    post:
+      summary: Crear nuevo producto
+      description: Crear un nuevo producto en la farmacia
+      operationId: createProduct
+      tags:
+        - products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product'
+      responses:
+        '201':
+          $ref: '#/components/responses/Success201ProductCreated'
+        '400':
+          $ref: '#/components/responses/Error400' 
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+  /products/{productId}:
+    put:
+      summary: Actualizar datos de un producto
+      description: Actualizar los datos de un unico producto
+      operationId: updateProduct
+      tags:
+        - products
+      parameters:
+        - name: productId
+          in: path
+          description: ID del producto a actualizar
+          required: true
+          schema:
+            type: integer
+          example: 123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/product'
+      responses:
+        '201':
+          $ref: '#/components/responses/Success201ProductUpdated'
+        '400':
+          $ref: '#/components/responses/Error400' 
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+    patch:
+      summary: Actualizar un dato de un producto
+      description: Actualizar un unico dato de un unico producto
+      operationId: patchProduct
+      tags:
+        - products
+      parameters:
+        - name: productId
+          in: path
+          description: ID del producto a actualizar
+          required: true
+          schema:
+            type: integer
+          example: 123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/productPatch'
+            example:
+              price: 222.44
+      responses:
+        '201':
+          $ref: '#/components/responses/Success201ProductPatched'
+        '400':
+          $ref: '#/components/responses/Error400' 
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+    delete:
+      summary: Eliminar producto
+      description: Elimina un producto
+      operationId: deleteProduct
+      tags:
+        - products
+      parameters:
+        - name: productId
+          in: path
+          description: ID de producto a eliminar
+          required: true
+          schema:
+            type: integer
+            format: int32
+          example: 123
+      responses:
+        '200':
+          $ref: '#/components/responses/Success200ProductDeleted'
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+  /employes:
+    get:
+      summary: Obtener todos los empleados
+      description: Obtiene todos los datos de los empleados
+      operationId: getEmployes
+      tags:
+        - employes
+      responses:
+        '200':
+          $ref: '#/components/responses/Success200Employes'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+    post:
+      summary: Registrar empleado
+      description: Registrar los datos de un nuevo empleado
+      operationId: createEmploye
+      tags:
+        - employes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/employe'
+      responses:
+        '201':
+          $ref: '#/components/responses/Success201EmployeCreated'
+        '400':
+          $ref: '#/components/responses/Error400' 
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+  /employes/{idEmploye}:
+    get:
+      summary: Obtener empleado por su ID
+      description: Obtiene la informacion de un empleado en especifico
+      operationId: getEmploye
+      tags:
+        - employes
+      parameters:
+        - name: idEmploye
+          in: path
+          description: ID de empleado a obtener
+          required: true
+          schema:
+            type: integer
+          example: 123
+      responses:
+        '200':
+          $ref: '#/components/responses/Success200Employe'
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+    put:
+      summary: Actualizar datos de un empleado
+      description: Actualizar todos los datos de un empleado
+      operationId: updateEmploye
+      tags:
+        - employes
+      parameters:
+        - name: idEmploye
+          in: path
+          description: ID de empleado a actualizar
+          required: true
+          schema:
+            type: integer
+          example: 123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/employe'
+      responses:
+        '201':
+          $ref: '#/components/responses/Success201EmployeUpdated'
+        '400':
+          $ref: '#/components/responses/Error400' 
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+    patch:
+      summary: Actualizar dato de empleado
+      description: Actualizar un unico dato de un empleado
+      operationId: patchEmploye
+      tags:
+        - employes
+      parameters:
+        - name: idEmploye
+          in: path
+          description: ID de empleado a actualizar dato
+          required: true
+          schema:
+            type: integer
+          example: 123
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/employePatch'
+            example:
+              name: "Vartolomeo"
+              lastName: "Bell"
+      responses:
+        '200':
+          $ref: '#/components/responses/Success200EmployePatched'
+        '400':
+          $ref: '#/components/responses/Error400' 
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+    delete:
+      summary: Eliminar empleado
+      description: Elimina empleado
+      operationId: deleteEmploye
+      tags:
+        - employes
+      parameters:
+        - name: idEmploye
+          in: path
+          description: ID de empleado a eliminar
+          required: true
+          schema:
+            type: integer
+            format: int32
+          example: 123
+      responses:
+        '200':
+          $ref: '#/components/responses/Success200EmployeDeleted'
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+  /sales:
+    get:
+      summary: Obtener información de todas las ventas de todas las farmacias
+      description: Obtiene todas las ventas de todas las farmacias
+      operationId: getSales
+      tags:
+        - sales
+      responses:
+        '200':
+          $ref: '#/components/responses/Success200Sales'
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+    post:
+      summary: Crear nueva venta
+      description: Crear una nueva venta en una farmacia
+      operationId: createSale
+      tags:
+        - sales
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/sale'
+      responses:
+        '201':
+          $ref: '#/components/responses/Success201SaleCreated'
+        '400':
+          $ref: '#/components/responses/Error400' 
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+  /sales/{idPharmacy}:
+    get:
+      summary: Obtiene las ventas por ID de farmacia
+      description: Obtiene ventas por farmacia
+      operationId: getSalesByPharmacy
+      tags:
+        - sales
+      parameters:
+        - name: idPharmacy
+          in: path
+          description: ID de farmacia a obtener ventas
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 2147483647
+          example: 123
+      responses:
+        '200':
+          $ref: '#/components/responses/Success200SalesByPharmacy'
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+  /sales/{saleId}:
+    delete:
+      summary: Eliminar venta por id
+      description: Elimina una venta por su ID
+      operationId: deleteSale
+      tags:
+        - sales
+      parameters:
+        - name: saleId
+          in: path
+          description: ID de venta a eliminar
+          required: true
+          schema:
+            type: integer
+            format: int32
+            minimum: 1
+            maximum: 2147483647
+          example: 123
+      responses:
+        '200':
+          $ref: '#/components/responses/Success200SaleDeleted'
+        '401':
+          $ref: '#/components/responses/Error401' 
+        '403':
+          $ref: '#/components/responses/Error403' 
+        '404':
+          $ref: '#/components/responses/Error404' 
+        '500':
+          $ref: '#/components/responses/Error500' 
+
+components:
+  schemas:
+    # ... (tus esquemas existentes se mantienen igual) ...
+    pharmacy:
+      type: object
+      required:
+        - idPharmacy
+        - name
+        - address
+      properties:
+        idPharmacy:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          example: 123
+        name:
+          type: string
+          minLength: 10
+          maxLength: 30
+          example: "Farmacia corazon"
+        address:
+          type: string
+          minLength: 20
+          maxLength: 50
+          example: "Calle Rosales #65"
+
+    pharmacyPatch:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 10
+          maxLength: 30
+          example: "Farmacia Cruz"
+        address:
+          type: string
+          minLength: 20
+          maxLength: 50
+          example: "Calle La luz #13"
+
+    employe:
+      type: object
+      required:
+        - idEmploye
+        - idPharmacy
+        - name
+        - lastName
+        - phone
+        - typeEmploye 
+      properties:
+        idEmploye:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          example: 123
+        idPharmacy:
+          type: integer
+          format: int32
+          description: Llave foranea que referencia ID de la tabla pharmacy
+          minimum: 1
+          maximum: 2147483647
+          example: 123
+        name:
+          type: string
+          minLength: 3
+          maxLength: 100
+          example: "Bartolomeo"
+        lastName:
+          type: string
+          minLength: 3
+          maxLength: 100
+          example: "Lee"
+        phone:
+          type: string
+          minLength: 10
+          maxLength: 20
+          example: "4424568932"
+        typeEmploye:
+          type: string
+          enum: [Cajero, Doctor]
+          description: Tipo de producto asociado (Cajero, Doctor)
+          example: "Generico"
+
+    employePatch:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 3
+          maxLength: 100
+          example: "Vartolomeo"
+        lastName:
+          type: string
+          minLength: 3
+          maxLength: 100
+          example: "Bell"
+
+    product:
+      type: object
+      required:
+        - productId
+        - productType
+        - name
+        - price
+      properties:
+        productId:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647
+          example: 123
+        productType:
+          type: string
+          enum: [Generico, Prescrito]
+          description: Tipo de producto asociado (Generico, Prescrito)
+          example: "Generico"
+        name:
+          type: string
+          minLength: 3
+          maxLength: 100
+          example: "Paracetamol"
+        description:
+          type: string
+          example: "Producto para aliviar el dolor y reducir la fiebre"
+        price:
+          type: number
+          format: double 
+          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$'
+          example: 200.50
+
+    productPatch:
+      type: object
+      properties:
+        price:
+          type: number
+          format: double
+          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$'
+          example: 222.44
+        description:
+          type: string
+          example: "Nueva descripción del producto"
+
+    sale:
+      type: object
+      required:
+        - saleId
+        - saleDate
+        - subTotal
+        - iva
+        - total
+        - employeId
+        - pharmacyId 
+        - products
+      properties:
+        saleId:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647 
+          example: 123
+        saleDate:
+          type: string
+          format: date-time 
+          pattern: '^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4} ([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$'
+          minLength: 19
+          maxLength: 19
+          example: "31/12/2025 16:12:21"
+        subTotal:
+          type: number
+          format: double
+          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$'
+          example: 22222.10
+        iva:
+          type: number
+          format: double
+          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$' 
+          example: 3555.54
+        total:
+          type: number
+          format: double
+          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$' 
+          example: 25777.64
+        pharmacyId: 
+          type: integer
+          format: int32
+          description: ID de la farmacia donde se realizó la venta
+          minimum: 1
+          maximum: 2147483647
+          example: 123
+        employeId:
+          type: integer
+          format: int32
+          description: ID del empleado que realizó la venta
+          minimum: 1
+          maximum: 2147483647 
+          example: 123
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/sale-product'
+
+    sale-product:
+      type: object
+      required:
+        - saleId
+        - productId
+        - quantity
+      properties:
+        saleId:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647 
+          example: 123
+        productId:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 2147483647  
+          example: 123
+        quantity:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 9999
+          example: 10
+
+    # --- Esquema Base de Success ---
+    Success:
+      type: object
+      description: Respuesta de éxito estándar
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Código de éxito
+        message:
+          type: string
+          description: Mensaje de éxito
+        data:
+          type: object
+          description: Datos de la respuesta
+          nullable: true
+
+    SuccessWithData:
+      type: object
+      description: Respuesta de éxito con datos
+      required:
+        - code
+        - message
+        - data
+      properties:
+        code:
+          type: string
+          description: Código de éxito
+        message:
+          type: string
+          description: Mensaje de éxito
+        data:
+          type: object
+          description: Datos de la respuesta
+
+    # --- Esquemas de Error (se mantienen igual) ---
+    Error:
+      type: object
+      description: Respuesta de error estándar
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: string
+          description: Código de error
+          example: "INVALID_CLIENT_ID"
+        message:
+          type: string
+          description: Mensaje de error 
+          example: "El ID del cliente debe ser entero numerico"
+        details:
+          type: object
+          description: Detalles adicionales del error
+          additionalProperties: true
+
+    Error400BadRequest:
+      description: "Error 400 - Solicitud incorrecta"
+      allOf:
+        - $ref: '#/components/schemas/Error'
+      example:
+        code: "VALIDATION_ERROR"
+        message: "Los datos proporcionados no son válidos."
+        details:
+          field: "fecha"
+          issue: "El formato de la fecha no es válido."
+
+    Error401Unauthorized:
+      description: "Error 401 - No autorizado"
+      allOf:
+        - $ref: '#/components/schemas/Error'
+      example:
+        code: "AUTH_TOKEN_MISSING"
+        message: "Se requiere un token de autenticación."
+
+    Error403Forbidden:
+      description: "Error 403 - Prohibido"
+      allOf:
+        - $ref: '#/components/schemas/Error'
+      example:
+        code: "INSUFFICIENT_PERMISSIONS"
+        message: "No tienes permiso para realizar esta acción."
+
+    Error404NotFound:
+      description: "Error 404 - No encontrado"
+      allOf:
+        - $ref: '#/components/schemas/Error'
+      example:
+        code: "RESOURCE_NOT_FOUND"
+        message: "El recurso solicitado no fue encontrado."
+
+    Error500InternalServerError:
+      description: "Error 500 - Error interno del servidor"
+      allOf:
+        - $ref: '#/components/schemas/Error'
+      example:
+        code: "INTERNAL_SERVER_ERROR"
+        message: "Ocurrió un error inesperado en el servidor."
+
+  # --- Componentes de Respuestas Reutilizables ---
+  responses:
+    # Respuestas de éxito para Pharmacys
+    Success200Pharmacys:
+      description: Lista de farmacias obtenida correctamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/SuccessWithData'
+            example:
+              code: "PHARMACYS_RETRIEVED"
+              message: "Lista de farmacias obtenida exitosamente"
+              data:
+                - idPharmacy: 12345
+                  name: "Simi Tech"
+                  address: "Av. tecnologico #123" 
+                - idPharmacy: 12346
+                  name: "Farma-Todo"
+                  address: "Calle Corregidora #50"
+
+    Success200Pharmacy:
+      description: Información de la farmacia obtenida correctamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/SuccessWithData'
+            example:
+              code: "PHARMACY_RETRIEVED"
+              message: "Información de la farmacia obtenida exitosamente"
+              data:
+                idPharmacy: 12345
+                name: "Simi Tech"
+                address: "Av. tecnologico #123"
+
+    Success201PharmacyCreated:
+      description: Farmacia creada exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "PHARMACY_CREATED"
+              message: "Farmacia creada exitosamente"
+
+    Success201PharmacyUpdated:
+      description: Farmacia actualizada exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "PHARMACY_UPDATED"
+              message: "Farmacia actualizada exitosamente"
+
+    Success201PharmacyPatched:
+      description: Farmacia actualizada parcialmente exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "PHARMACY_PATCHED"
+              message: "Farmacia actualizada parcialmente exitosamente"
+
+    Success200PharmacyDeleted:
+      description: Farmacia eliminada exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "PHARMACY_DELETED"
+              message: "Farmacia eliminada exitosamente"
+
+    # Respuestas de éxito para Products
+    Success200Products:
+      description: Lista de productos obtenida correctamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/SuccessWithData'
+            example:
+              code: "PRODUCTS_RETRIEVED"
+              message: "Lista de productos obtenida exitosamente"
+              data:
+                - productId: 1
+                  productType: "Generico"
+                  name: "Paracetamol"
+                  description: "Producto para aliviar el dolor y reducir la fiebre"
+                  price: 200.50
+                - productId: 2
+                  productType: "Prescrito" 
+                  name: "Amoxicilina"
+                  description: "Para enfermedades infecciosas"
+                  price: 150.75
+
+    Success201ProductCreated:
+      description: Producto creado exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "PRODUCT_CREATED"
+              message: "Producto creado exitosamente"
+
+    Success201ProductUpdated:
+      description: Producto actualizado exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "PRODUCT_UPDATED"
+              message: "Producto actualizado exitosamente"
+
+    Success201ProductPatched:
+      description: Producto actualizado parcialmente exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "PRODUCT_PATCHED"
+              message: "Producto actualizado parcialmente exitosamente"
+
+    Success200ProductDeleted:
+      description: Producto eliminado exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "PRODUCT_DELETED"
+              message: "Producto eliminado exitosamente"
+
+    # Respuestas de éxito para Employes
+    Success200Employes:
+      description: Lista de empleados obtenida correctamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/SuccessWithData'
+            example:
+              code: "EMPLOYES_RETRIEVED"
+              message: "Lista de empleados obtenida exitosamente"
+              data:
+                - idEmploye: 123
+                  idPharmacy: 234
+                  name: "Bartolomeo"
+                  lastName: "Lee"
+                  phone: "4424568932"
+                  typeEmploye: "Doctor"
+                - idEmploye: 124
+                  idPharmacy: 234
+                  name: "Pepe"
+                  lastName: "Lara"
+                  phone: "4424568933"
+                  typeEmploye: "Cajero"
+
+    Success200Employe:
+      description: Información del empleado obtenida correctamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/SuccessWithData'
+            example:
+              code: "EMPLOYE_RETRIEVED"
+              message: "Información del empleado obtenida exitosamente"
+              data:
+                idEmploye: 123
+                idPharmacy: 234
+                name: "Bartolomeo"
+                lastName: "Lee"
+                phone: "4424568932"
+                typeEmploye: "Doctor"
+
+    Success201EmployeCreated:
+      description: Empleado creado exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "EMPLOYE_CREATED"
+              message: "Empleado creado exitosamente"
+
+    Success201EmployeUpdated:
+      description: Empleado actualizado exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "EMPLOYE_UPDATED"
+              message: "Empleado actualizado exitosamente"
+
+    Success200EmployePatched:
+      description: Empleado actualizado parcialmente exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "EMPLOYE_PATCHED"
+              message: "Empleado actualizado parcialmente exitosamente"
+
+    Success200EmployeDeleted:
+      description: Empleado eliminado exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "EMPLOYE_DELETED"
+              message: "Empleado eliminado exitosamente"
+
+    # Respuestas de éxito para Sales
+    Success200Sales:
+      description: Lista de ventas obtenida correctamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/SuccessWithData'
+            example:
+              code: "SALES_RETRIEVED"
+              message: "Lista de ventas obtenida exitosamente"
+              data:
+                - saleId: 123
+                  saleDate: "31/12/2025 16:12:21"
+                  subTotal: 22222.10
+                  iva: 8.22
+                  total: 22222.10
+                  pharmacyId: 123
+                  employeId: 123
+                  products: 
+                    - saleId: 123
+                      productId: 123
+                      quantity: 10
+                    - saleId: 123
+                      productId: 124
+                      quantity: 5
+                - saleId: 124
+                  saleDate: "31/12/2025 17:00:00"
+                  subTotal: 1000.00
+                  iva: 160.00
+                  total: 1160.00
+                  pharmacyId: 124
+                  employeId: 124
+                  products:
+                    - saleId: 124
+                      productId: 1
+                      quantity: 2
+
+    Success200SalesByPharmacy:
+      description: Ventas por farmacia obtenidas correctamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/SuccessWithData'
+            example:
+              code: "SALES_BY_PHARMACY_RETRIEVED"
+              message: "Ventas por farmacia obtenidas exitosamente"
+              data:
+                - saleId: 123
+                  saleDate: "31/12/2025 16:12:21"
+                  subTotal: 22222.10
+                  iva: 8.22
+                  total: 22222.10
+                  pharmacyId: 123
+                  employeId: 123
+                - saleId: 125
+                  saleDate: "31/12/2025 18:12:21"
+                  subTotal: 500.00
+                  iva: 80.00
+                  total: 580.00
+                  pharmacyId: 123
+                  employeId: 123
+
+    Success201SaleCreated:
+      description: Venta creada exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "SALE_CREATED"
+              message: "Venta creada exitosamente"
+
+    Success200SaleDeleted:
+      description: Venta eliminada exitosamente
+      content:
+        application/json:
+          schema:
+            allOf:
+              - $ref: '#/components/schemas/Success'
+            example:
+              code: "SALE_DELETED"
+              message: "Venta eliminada exitosamente"
+
+    # Respuestas de error
+    Error400:
+      description: Solicitud incorrecta
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error400BadRequest'
+    Error401:
+      description: No autorizado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error401Unauthorized'
+    Error403:
+      description: Prohibido
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error403Forbidden'
+    Error404:
+      description: No encontrado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error404NotFound'
+    Error500:
+      description: Error interno del servidor
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error500InternalServerError'
