@@ -33,7 +33,7 @@ public class ProductsService {
         boolean idExists = products.stream()
                 .anyMatch(p -> p.getProductId().equals(product.getProductId()));
         if (idExists) {
-            // Usar AlreadyExistsException en lugar de RuntimeException
+            // Usar AlreadyExistsException 
             throw new AlreadyExistsException("El ID del producto ya existe: " + product.getProductId());
         }
 
@@ -57,7 +57,7 @@ public class ProductsService {
             .findFirst();
             
         if (existingProductOpt.isPresent()) {
-            // Actualizar el producto (en una aplicación real, guardar en la base de datos)
+            // Actualizar el producto
             Product existingProduct = existingProductOpt.get();
             existingProduct.setName(product.getName());
             existingProduct.setDescription(product.getDescription());
@@ -65,8 +65,8 @@ public class ProductsService {
             existingProduct.setProductType(product.getProductType());
             return existingProduct; // Retornar el producto actualizado
         } else {
-            // Si no existe retornar un null
-            return null;
+            // Si no existe retornar un exception
+            throw new AlreadyExistsException("El producto con ID no fue encontrado: " + product.getProductId());
         }
     }
 
@@ -91,8 +91,8 @@ public class ProductsService {
             
             return existingProduct;
         }
-        // Si no existe, retornar un null
-        return null;
+        // Si no existe, retornar un exception
+        throw new AlreadyExistsException("El producto con ID no fue encontrado: " + id);
     }
 
     public String deleteProduct(Integer id) {
@@ -104,7 +104,7 @@ public class ProductsService {
         if (removed) {
             return "Producto con ID " + id + " eliminado correctamente";
         } else {
-            return null;
+            throw new AlreadyExistsException("El producto con ID no fue encontrado: " + id);
         }
     }
 }

@@ -48,7 +48,7 @@ import org.hibernate.validator.constraints.*;
   Sale.JSON_PROPERTY_EMPLOYE_ID,
   Sale.JSON_PROPERTY_PRODUCTS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-03T08:10:55.684112900-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
 public class Sale {
   public static final String JSON_PROPERTY_SALE_ID = "saleId";
   private Integer saleId;

@@ -42,7 +42,7 @@ import org.hibernate.validator.constraints.*;
   Employe.JSON_PROPERTY_PHONE,
   Employe.JSON_PROPERTY_TYPE_EMPLOYE
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-03T08:10:55.684112900-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
 public class Employe {
   public static final String JSON_PROPERTY_ID_EMPLOYE = "idEmploye";
   private Integer idEmploye;

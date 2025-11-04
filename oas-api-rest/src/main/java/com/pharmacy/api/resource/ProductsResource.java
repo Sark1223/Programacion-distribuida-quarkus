@@ -68,10 +68,10 @@ public class ProductsResource {
         System.out.println("Controller - Producto recibido: " + productRequest);
 
         // Validación del ID
-        if (id == null || id < 1 || id > 999999) {
+        if (id == null || id < 1 || id > 2147483647) {
             Error400BadRequest errorResponse = new Error400BadRequest();
             errorResponse.setCode("INVALID_PRODUCT_ID");
-            errorResponse.setMessage("El ID del producto es inválido. Debe estar entre 1 y 999999.");
+            errorResponse.setMessage("El ID del producto es inválido. Debe estar entre 1 y 2147483647.");
             errorResponse.putDetailsItem("invalidId", id);
             return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
         }
@@ -100,10 +100,10 @@ public class ProductsResource {
         System.out.println("Controller - Información recibida: " + productRequest);
         
         // Validación del ID
-        if (id == null || id < 1 || id > 999999) {
+        if (id == null || id < 1 || id > 2147483647) {
             Error400BadRequest errorResponse = new Error400BadRequest();
             errorResponse.setCode("INVALID_PRODUCT_ID");
-            errorResponse.setMessage("El ID del producto es inválido. Debe estar entre 1 y 999999.");
+            errorResponse.setMessage("El ID del producto es inválido. Debe estar entre 1 y 2147483647.");
             errorResponse.putDetailsItem("invalidId", id);
             return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
         }
@@ -132,24 +132,16 @@ public class ProductsResource {
         System.out.println("Controller - Información recibida: " + id);
         
         // Validación del ID
-        if (id == null || id < 1 || id > 999999) {
+        if (id == null || id < 1 || id > 2147483647) {
             Error400BadRequest errorResponse = new Error400BadRequest();
             errorResponse.setCode("INVALID_PRODUCT_ID");
-            errorResponse.setMessage("El ID del producto es inválido. Debe estar entre 1 y 999999.");
+            errorResponse.setMessage("El ID del producto es inválido. Debe estar entre 1 y 2147483647.");
             errorResponse.putDetailsItem("invalidId", id);
             return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
         }
         
         String deletionResult = productsService.deleteProduct(id);
-        
-        if(deletionResult == null) {
-            Error400BadRequest errorResponse = new Error400BadRequest();
-            errorResponse.setCode("PRODUCT_NOT_FOUND");
-            errorResponse.setMessage("No se encontró el producto con el ID proporcionado.");
-            errorResponse.putDetailsItem("invalidId", id);
-            return Response.status(Response.Status.BAD_REQUEST).entity(errorResponse).build();
-        }
-        
+                
         Success response = new Success();
         response.setCode("PRODUCT_DELETED");
         response.setMessage("Producto eliminado exitosamente");

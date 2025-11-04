@@ -82,7 +82,10 @@ paths:
           required: true
           schema:
             type: integer
-          example: 123
+            format: int32
+            minimum: 1
+            maximum: 2147483647 
+            example: 123
       responses:
         '200':
           $ref: '#/components/responses/Success200Pharmacy'
@@ -106,7 +109,10 @@ paths:
           required: true
           schema:
             type: integer
-          example: 123
+            format: int32
+            minimum: 1
+            maximum: 2147483647 
+            example: 123
       requestBody:
         required: true
         content:
@@ -140,7 +146,10 @@ paths:
           required: true
           schema:
             type: integer
-          example: 123
+            format: int32
+            minimum: 1
+            maximum: 2147483647 
+            example: 123
       requestBody:
         required: true
         content:
@@ -178,7 +187,9 @@ paths:
           schema:
             type: integer
             format: int32
-          example: 123
+            minimum: 1
+            maximum: 2147483647 
+            example: 123
       responses:
         '200':
           $ref: '#/components/responses/Success200PharmacyDeleted'
@@ -246,7 +257,10 @@ paths:
           required: true
           schema:
             type: integer
-          example: 123
+            format: int32
+            minimum: 1
+            maximum: 2147483647 
+            example: 123
       requestBody:
         required: true
         content:
@@ -280,7 +294,10 @@ paths:
           required: true
           schema:
             type: integer
-          example: 123
+            format: int32
+            minimum: 1
+            maximum: 2147483647 
+            example: 123
       requestBody:
         required: true
         content:
@@ -317,7 +334,9 @@ paths:
           schema:
             type: integer
             format: int32
-          example: 123
+            minimum: 1
+            maximum: 2147483647 
+            example: 123
       responses:
         '200':
           $ref: '#/components/responses/Success200ProductDeleted'
@@ -385,7 +404,10 @@ paths:
           required: true
           schema:
             type: integer
-          example: 123
+            format: int32
+            minimum: 1
+            maximum: 2147483647 
+            example: 123
       responses:
         '200':
           $ref: '#/components/responses/Success200Employe'
@@ -409,7 +431,10 @@ paths:
           required: true
           schema:
             type: integer
-          example: 123
+            format: int32
+            minimum: 1
+            maximum: 2147483647 
+            example: 123
       requestBody:
         required: true
         content:
@@ -443,7 +468,10 @@ paths:
           required: true
           schema:
             type: integer
-          example: 123
+            format: int32
+            minimum: 1
+            maximum: 2147483647 
+            example: 123
       requestBody:
         required: true
         content:
@@ -481,7 +509,9 @@ paths:
           schema:
             type: integer
             format: int32
-          example: 123
+            minimum: 1
+            maximum: 2147483647 
+            example: 123
       responses:
         '200':
           $ref: '#/components/responses/Success200EmployeDeleted'
@@ -595,7 +625,7 @@ paths:
 
 components:
   schemas:
-    # ... (tus esquemas existentes se mantienen igual) ...
+    
     pharmacy:
       type: object
       required:
@@ -611,13 +641,13 @@ components:
           example: 123
         name:
           type: string
-          minLength: 10
-          maxLength: 30
+          minLength: 3
+          maxLength: 100
           example: "Farmacia corazon"
         address:
           type: string
-          minLength: 20
-          maxLength: 50
+          minLength: 3
+          maxLength: 254
           example: "Calle Rosales #65"
 
     pharmacyPatch:
@@ -625,13 +655,13 @@ components:
       properties:
         name:
           type: string
-          minLength: 10
-          maxLength: 30
+          minLength: 3
+          maxLength: 100
           example: "Farmacia Cruz"
         address:
           type: string
-          minLength: 20
-          maxLength: 50
+          minLength: 3
+          maxLength: 254
           example: "Calle La luz #13"
 
     employe:
@@ -676,7 +706,7 @@ components:
           type: string
           enum: [Cajero, Doctor]
           description: Tipo de producto asociado (Cajero, Doctor)
-          example: "Generico"
+          example: "Cajero"
 
     employePatch:
       type: object

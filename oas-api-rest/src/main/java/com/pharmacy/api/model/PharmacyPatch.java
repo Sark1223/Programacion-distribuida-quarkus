@@ -38,7 +38,7 @@ import org.hibernate.validator.constraints.*;
   PharmacyPatch.JSON_PROPERTY_NAME,
   PharmacyPatch.JSON_PROPERTY_ADDRESS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-03T08:10:55.684112900-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
 public class PharmacyPatch {
   public static final String JSON_PROPERTY_NAME = "name";
   private String name;
@@ -59,7 +59,7 @@ public class PharmacyPatch {
    * @return name
   **/
   @jakarta.annotation.Nullable
- @Size(min=10,max=30)
+ @Size(min=3,max=100)
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -85,7 +85,7 @@ public class PharmacyPatch {
    * @return address
   **/
   @jakarta.annotation.Nullable
- @Size(min=20,max=50)
+ @Size(min=3,max=254)
   @JsonProperty(JSON_PROPERTY_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 

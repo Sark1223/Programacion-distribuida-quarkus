@@ -15,20 +15,17 @@ package com.pharmacy.api.model;
 
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.StringJoiner;
 import java.util.Objects;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.StringJoiner;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.fasterxml.jackson.annotation.JsonValue;
-import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import jakarta.validation.constraints.*;
-import jakarta.validation.Valid;
-import org.hibernate.validator.constraints.*;
+
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 /**
@@ -39,7 +36,7 @@ import org.hibernate.validator.constraints.*;
   Pharmacy.JSON_PROPERTY_NAME,
   Pharmacy.JSON_PROPERTY_ADDRESS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-03T08:10:55.684112900-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
 public class Pharmacy {
   public static final String JSON_PROPERTY_ID_PHARMACY = "idPharmacy";
   private Integer idPharmacy;
@@ -53,6 +50,12 @@ public class Pharmacy {
   public Pharmacy() { 
   }
 
+  public Pharmacy(Integer idPharmacy, String name, String address) {
+    this.idPharmacy = idPharmacy;
+    this.name = name;
+    this.address = address;
+  }
+  
   public Pharmacy idPharmacy(Integer idPharmacy) {
     this.idPharmacy = idPharmacy;
     return this;
@@ -93,7 +96,7 @@ public class Pharmacy {
   **/
   @jakarta.annotation.Nonnull
   @NotNull
- @Size(min=10,max=30)
+ @Size(min=3,max=100)
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -120,7 +123,7 @@ public class Pharmacy {
   **/
   @jakarta.annotation.Nonnull
   @NotNull
- @Size(min=20,max=50)
+ @Size(min=3,max=254)
   @JsonProperty(JSON_PROPERTY_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

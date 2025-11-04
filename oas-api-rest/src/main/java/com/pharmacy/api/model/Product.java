@@ -40,7 +40,7 @@ import jakarta.validation.constraints.Size;
   Product.JSON_PROPERTY_DESCRIPTION,
   Product.JSON_PROPERTY_PRICE
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-03T08:10:55.684112900-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
 public class Product {
   public static final String JSON_PROPERTY_PRODUCT_ID = "productId";
   private Integer productId;
@@ -92,19 +92,21 @@ public class Product {
   public static final String JSON_PROPERTY_PRICE = "price";
   private Double price;
 
+  public Product() { 
+  }
+
   public Product(int id, ProductTypeEnum productType, String name, double price) {
     this.productId = id;
     this.productType = productType;
     this.name = name;
     this.price = price;
   }
-
   public Product productId(Integer productId) {
     this.productId = productId;
     return this;
   }
 
-  /**
+   /**
    * Get productId
    * minimum: 1
    * maximum: 2147483647
@@ -112,7 +114,7 @@ public class Product {
   **/
   @jakarta.annotation.Nonnull
   @NotNull
-  @Min(1) @Max(2147483647)
+ @Min(1) @Max(2147483647)
   @JsonProperty(JSON_PROPERTY_PRODUCT_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
