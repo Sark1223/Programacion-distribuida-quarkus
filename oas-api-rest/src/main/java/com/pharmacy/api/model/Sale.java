@@ -48,7 +48,7 @@ import org.hibernate.validator.constraints.*;
   Sale.JSON_PROPERTY_EMPLOYE_ID,
   Sale.JSON_PROPERTY_PRODUCTS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T17:58:46.397555300-06:00[America/Mexico_City]")
 public class Sale {
   public static final String JSON_PROPERTY_SALE_ID = "saleId";
   private Integer saleId;
@@ -88,11 +88,10 @@ public class Sale {
    * maximum: 2147483647
    * @return saleId
   **/
-  @jakarta.annotation.Nonnull
-  @NotNull
+  @jakarta.annotation.Nullable
  @Min(1) @Max(2147483647)
   @JsonProperty(JSON_PROPERTY_SALE_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
   public Integer getSaleId() {
     return saleId;
@@ -100,7 +99,7 @@ public class Sale {
 
 
   @JsonProperty(JSON_PROPERTY_SALE_ID)
-  @JsonInclude(value = JsonInclude.Include.ALWAYS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSaleId(Integer saleId) {
     this.saleId = saleId;
   }
@@ -118,7 +117,7 @@ public class Sale {
   @jakarta.annotation.Nonnull
   @NotNull
   @Valid
- @Pattern(regexp="^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4} ([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$") @Size(min=19,max=19)
+
   @JsonProperty(JSON_PROPERTY_SALE_DATE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
@@ -395,42 +394,42 @@ public class Sale {
 
     StringJoiner joiner = new StringJoiner("&");
 
-    // add `saleId` to the URL query string
+
     if (getSaleId() != null) {
       joiner.add(String.format("%ssaleId%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getSaleId()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-    // add `saleDate` to the URL query string
+
     if (getSaleDate() != null) {
       joiner.add(String.format("%ssaleDate%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getSaleDate()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-    // add `subTotal` to the URL query string
+
     if (getSubTotal() != null) {
       joiner.add(String.format("%ssubTotal%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getSubTotal()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-    // add `iva` to the URL query string
+
     if (getIva() != null) {
       joiner.add(String.format("%siva%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getIva()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-    // add `total` to the URL query string
+
     if (getTotal() != null) {
       joiner.add(String.format("%stotal%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getTotal()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-    // add `pharmacyId` to the URL query string
+
     if (getPharmacyId() != null) {
       joiner.add(String.format("%spharmacyId%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getPharmacyId()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-    // add `employeId` to the URL query string
+
     if (getEmployeId() != null) {
       joiner.add(String.format("%semployeId%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getEmployeId()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-    // add `products` to the URL query string
+
     if (getProducts() != null) {
       for (int i = 0; i < getProducts().size(); i++) {
         if (getProducts().get(i) != null) {
