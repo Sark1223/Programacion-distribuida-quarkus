@@ -38,7 +38,7 @@ import org.hibernate.validator.constraints.*;
   ProductPatch.JSON_PROPERTY_PRICE,
   ProductPatch.JSON_PROPERTY_DESCRIPTION
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T18:47:26.075651800-06:00[America/Mexico_City]")
 public class ProductPatch {
   public static final String JSON_PROPERTY_PRICE = "price";
   private Double price;

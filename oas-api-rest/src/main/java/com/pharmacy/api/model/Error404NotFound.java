@@ -41,7 +41,7 @@ import org.hibernate.validator.constraints.*;
   Error404NotFound.JSON_PROPERTY_MESSAGE,
   Error404NotFound.JSON_PROPERTY_DETAILS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T18:47:26.075651800-06:00[America/Mexico_City]")
 public class Error404NotFound {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;

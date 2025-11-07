@@ -39,7 +39,7 @@ import org.hibernate.validator.constraints.*;
   SaleProduct.JSON_PROPERTY_PRODUCT_ID,
   SaleProduct.JSON_PROPERTY_QUANTITY
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T17:58:46.397555300-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T18:47:26.075651800-06:00[America/Mexico_City]")
 public class SaleProduct {
   public static final String JSON_PROPERTY_SALE_ID = "saleId";
   private Integer saleId;
@@ -215,17 +215,17 @@ public class SaleProduct {
 
     StringJoiner joiner = new StringJoiner("&");
 
-
+    // add `saleId` to the URL query string
     if (getSaleId() != null) {
       joiner.add(String.format("%ssaleId%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getSaleId()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-
+    // add `productId` to the URL query string
     if (getProductId() != null) {
       joiner.add(String.format("%sproductId%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getProductId()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-
+    // add `quantity` to the URL query string
     if (getQuantity() != null) {
       joiner.add(String.format("%squantity%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getQuantity()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }

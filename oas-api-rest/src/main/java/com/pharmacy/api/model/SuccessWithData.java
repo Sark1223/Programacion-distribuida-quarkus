@@ -39,7 +39,7 @@ import org.hibernate.validator.constraints.*;
   SuccessWithData.JSON_PROPERTY_MESSAGE,
   SuccessWithData.JSON_PROPERTY_DATA
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T18:47:26.075651800-06:00[America/Mexico_City]")
 public class SuccessWithData {
   public static final String JSON_PROPERTY_CODE = "code";
   private String code;

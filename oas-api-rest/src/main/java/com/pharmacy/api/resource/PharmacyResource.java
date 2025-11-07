@@ -5,6 +5,7 @@ import java.util.List;
 import com.pharmacy.api.commons.BadRequestException;
 import com.pharmacy.api.model.Pharmacy;
 import com.pharmacy.api.model.PharmacyPatch;
+import com.pharmacy.api.model.Sale;
 import com.pharmacy.api.model.Success;
 import com.pharmacy.api.model.SuccessWithData;
 import com.pharmacy.api.service.PharmacyService;
@@ -65,6 +66,26 @@ public class PharmacyResource {
     
         return Response.ok(response).build();
     }
+
+    @GET
+	@Path("/pharmacys/{idPharmacy}/sales")
+	public Response getSalesByPharmacy(@PathParam("idPharmacy") Integer idPharmacy) {
+		System.out.println("Controller - Obteniendo ventas por farmacia ID: " + idPharmacy);
+
+		// Validación básica del ID
+		if (idPharmacy == null || idPharmacy < 1 || idPharmacy > 2147483647) {
+			throw new BadRequestException("El ID de la farmacia es inválido. Debe estar entre 1 y 2147483647.");
+		}
+
+		List<Sale> sales = pharmacyService.getSalesByPharmacy(idPharmacy);
+
+		SuccessWithData response = new SuccessWithData();
+		response.setCode("SALES_BY_PHARMACY_RETRIEVED");
+		response.setMessage("Ventas por farmacia obtenidas exitosamente");
+		response.setData(sales);
+
+		return Response.ok(response).build();
+	}
 
     @POST
     @Path("/pharmacys")

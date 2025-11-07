@@ -45,10 +45,10 @@ import org.hibernate.validator.constraints.*;
   Sale.JSON_PROPERTY_IVA,
   Sale.JSON_PROPERTY_TOTAL,
   Sale.JSON_PROPERTY_PHARMACY_ID,
-  Sale.JSON_PROPERTY_EMPLOYE_ID,
+  Sale.JSON_PROPERTY_EMPLOYEE_ID,
   Sale.JSON_PROPERTY_PRODUCTS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T17:58:46.397555300-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T18:47:26.075651800-06:00[America/Mexico_City]")
 public class Sale {
   public static final String JSON_PROPERTY_SALE_ID = "saleId";
   private Integer saleId;
@@ -68,8 +68,8 @@ public class Sale {
   public static final String JSON_PROPERTY_PHARMACY_ID = "pharmacyId";
   private Integer pharmacyId;
 
-  public static final String JSON_PROPERTY_EMPLOYE_ID = "employeId";
-  private Integer employeId;
+  public static final String JSON_PROPERTY_EMPLOYEE_ID = "employeeId";
+  private Integer employeeId;
 
   public static final String JSON_PROPERTY_PRODUCTS = "products";
   private List<SaleProduct> products = new ArrayList<>();
@@ -243,8 +243,8 @@ public class Sale {
   }
 
 
-  public Sale employeId(Integer employeId) {
-    this.employeId = employeId;
+  public Sale employeeId(Integer employeeId) {
+    this.employeeId = employeeId;
     return this;
   }
 
@@ -252,23 +252,23 @@ public class Sale {
    * ID del empleado que realizó la venta
    * minimum: 1
    * maximum: 2147483647
-   * @return employeId
+   * @return employeeId
   **/
   @jakarta.annotation.Nonnull
   @NotNull
  @Min(1) @Max(2147483647)
-  @JsonProperty(JSON_PROPERTY_EMPLOYE_ID)
+  @JsonProperty(JSON_PROPERTY_EMPLOYEE_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public Integer getEmployeId() {
-    return employeId;
+  public Integer getEmployeeId() {
+    return employeeId;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_EMPLOYE_ID)
+  @JsonProperty(JSON_PROPERTY_EMPLOYEE_ID)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setEmployeId(Integer employeId) {
-    this.employeId = employeId;
+  public void setEmployeeId(Integer employeeId) {
+    this.employeeId = employeeId;
   }
 
 
@@ -326,13 +326,13 @@ public class Sale {
         Objects.equals(this.iva, sale.iva) &&
         Objects.equals(this.total, sale.total) &&
         Objects.equals(this.pharmacyId, sale.pharmacyId) &&
-        Objects.equals(this.employeId, sale.employeId) &&
+        Objects.equals(this.employeeId, sale.employeeId) &&
         Objects.equals(this.products, sale.products);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(saleId, saleDate, subTotal, iva, total, pharmacyId, employeId, products);
+    return Objects.hash(saleId, saleDate, subTotal, iva, total, pharmacyId, employeeId, products);
   }
 
   @Override
@@ -345,7 +345,7 @@ public class Sale {
     sb.append("    iva: ").append(toIndentedString(iva)).append("\n");
     sb.append("    total: ").append(toIndentedString(total)).append("\n");
     sb.append("    pharmacyId: ").append(toIndentedString(pharmacyId)).append("\n");
-    sb.append("    employeId: ").append(toIndentedString(employeId)).append("\n");
+    sb.append("    employeeId: ").append(toIndentedString(employeeId)).append("\n");
     sb.append("    products: ").append(toIndentedString(products)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -394,42 +394,42 @@ public class Sale {
 
     StringJoiner joiner = new StringJoiner("&");
 
-
+    // add `saleId` to the URL query string
     if (getSaleId() != null) {
       joiner.add(String.format("%ssaleId%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getSaleId()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-
+    // add `saleDate` to the URL query string
     if (getSaleDate() != null) {
       joiner.add(String.format("%ssaleDate%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getSaleDate()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-
+    // add `subTotal` to the URL query string
     if (getSubTotal() != null) {
       joiner.add(String.format("%ssubTotal%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getSubTotal()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-
+    // add `iva` to the URL query string
     if (getIva() != null) {
       joiner.add(String.format("%siva%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getIva()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-
+    // add `total` to the URL query string
     if (getTotal() != null) {
       joiner.add(String.format("%stotal%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getTotal()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-
+    // add `pharmacyId` to the URL query string
     if (getPharmacyId() != null) {
       joiner.add(String.format("%spharmacyId%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getPharmacyId()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-
-    if (getEmployeId() != null) {
-      joiner.add(String.format("%semployeId%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getEmployeId()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    // add `employeeId` to the URL query string
+    if (getEmployeeId() != null) {
+      joiner.add(String.format("%semployeeId%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getEmployeeId()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-
+    // add `products` to the URL query string
     if (getProducts() != null) {
       for (int i = 0; i < getProducts().size(); i++) {
         if (getProducts().get(i) != null) {

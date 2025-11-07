@@ -36,7 +36,7 @@ import jakarta.validation.constraints.Size;
   Pharmacy.JSON_PROPERTY_NAME,
   Pharmacy.JSON_PROPERTY_ADDRESS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T18:47:26.075651800-06:00[America/Mexico_City]")
 public class Pharmacy {
   public static final String JSON_PROPERTY_ID_PHARMACY = "idPharmacy";
   private Integer idPharmacy;
@@ -55,7 +55,7 @@ public class Pharmacy {
     this.name = name;
     this.address = address;
   }
-  
+
   public Pharmacy idPharmacy(Integer idPharmacy) {
     this.idPharmacy = idPharmacy;
     return this;

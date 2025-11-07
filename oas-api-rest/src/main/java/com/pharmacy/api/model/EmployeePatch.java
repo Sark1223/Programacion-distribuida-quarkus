@@ -32,15 +32,15 @@ import org.hibernate.validator.constraints.*;
 
 
 /**
- * EmployePatch
+ * EmployeePatch
  */
 @JsonPropertyOrder({
-  EmployePatch.JSON_PROPERTY_NAME,
-  EmployePatch.JSON_PROPERTY_LAST_NAME,
-  EmployePatch.JSON_PROPERTY_PHONE
+  EmployeePatch.JSON_PROPERTY_NAME,
+  EmployeePatch.JSON_PROPERTY_LAST_NAME,
+  EmployeePatch.JSON_PROPERTY_PHONE
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
-public class EmployePatch {
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T18:47:26.075651800-06:00[America/Mexico_City]")
+public class EmployeePatch {
   public static final String JSON_PROPERTY_NAME = "name";
   private String name;
 
@@ -50,10 +50,10 @@ public class EmployePatch {
   public static final String JSON_PROPERTY_PHONE = "phone";
   private String phone;
 
-  public EmployePatch() { 
+  public EmployeePatch() { 
   }
 
-  public EmployePatch name(String name) {
+  public EmployeePatch name(String name) {
     this.name = name;
     return this;
   }
@@ -79,7 +79,7 @@ public class EmployePatch {
   }
 
 
-  public EmployePatch lastName(String lastName) {
+  public EmployeePatch lastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
@@ -104,17 +104,18 @@ public class EmployePatch {
     this.lastName = lastName;
   }
 
-  public EmployePatch phone(String phone) {
+
+  public EmployeePatch phone(String phone) {
     this.phone = phone;
     return this;
   }
 
-    /**
-    * Get phone
-    * @return phone
-    **/
+   /**
+   * Get phone
+   * @return phone
+  **/
   @jakarta.annotation.Nullable
-  @Size(min=10,max=20) // Uso las validaciones de tu esquema 'employe'
+ @Size(min=10,max=20)
   @JsonProperty(JSON_PROPERTY_PHONE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
 
@@ -131,7 +132,7 @@ public class EmployePatch {
 
 
   /**
-   * Return true if this employePatch object is equal to o.
+   * Return true if this employeePatch object is equal to o.
    */
   @Override
   public boolean equals(Object o) {
@@ -141,22 +142,24 @@ public class EmployePatch {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EmployePatch employePatch = (EmployePatch) o;
-    return Objects.equals(this.name, employePatch.name) &&
-        Objects.equals(this.lastName, employePatch.lastName);
+    EmployeePatch employeePatch = (EmployeePatch) o;
+    return Objects.equals(this.name, employeePatch.name) &&
+        Objects.equals(this.lastName, employeePatch.lastName) &&
+        Objects.equals(this.phone, employeePatch.phone);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, lastName);
+    return Objects.hash(name, lastName, phone);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EmployePatch {\n");
+    sb.append("class EmployeePatch {\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
+    sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -212,6 +215,11 @@ public class EmployePatch {
     // add `lastName` to the URL query string
     if (getLastName() != null) {
       joiner.add(String.format("%slastName%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getLastName()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    }
+
+    // add `phone` to the URL query string
+    if (getPhone() != null) {
+      joiner.add(String.format("%sphone%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getPhone()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
     return joiner.toString();

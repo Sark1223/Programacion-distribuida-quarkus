@@ -61,26 +61,6 @@ public class SaleResource {
 		return Response.status(Response.Status.CREATED).entity(response).build();
 	}
 
-	@GET
-	@Path("/sales/{idPharmacy}")
-	public Response getSalesByPharmacy(@PathParam("idPharmacy") Integer idPharmacy) {
-		System.out.println("Controller - Obteniendo ventas por farmacia ID: " + idPharmacy);
-
-		// Validación básica del ID
-		if (idPharmacy == null || idPharmacy < 1 || idPharmacy > 2147483647) {
-			throw new BadRequestException("El ID de la farmacia es inválido. Debe estar entre 1 y 2147483647.");
-		}
-
-		List<Sale> sales = saleService.getSalesByPharmacy(idPharmacy);
-
-		SuccessWithData response = new SuccessWithData();
-		response.setCode("SALES_BY_PHARMACY_RETRIEVED");
-		response.setMessage("Ventas por farmacia obtenidas exitosamente");
-		response.setData(sales);
-
-		return Response.ok(response).build();
-	}
-
 	@PUT
 	@Path("/sales/{id}")
 	public Response updateSale(@PathParam("id") Integer saleId, @Valid Sale saleRequest) {

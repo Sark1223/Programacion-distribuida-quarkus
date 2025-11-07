@@ -1,37 +1,51 @@
 package com.pharmacy.api.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.pharmacy.api.commons.AlreadyExistsException;
 import com.pharmacy.api.commons.BadRequestException;
 import com.pharmacy.api.commons.NotFoundException;
+import com.pharmacy.api.data.SharedData;
 import com.pharmacy.api.model.Pharmacy;
 import com.pharmacy.api.model.PharmacyPatch;
+import com.pharmacy.api.model.Sale;
 
 import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 @ApplicationScoped
 public class PharmacyService {
 
-    private List<Pharmacy> pharmacys = new ArrayList<>(Arrays.asList(
-        new Pharmacy(1, "Similares - Real Solare", "Avenida Siempre Viva 123 colonia Real Solare"),
-        new Pharmacy(12, "Similares 3", "Centro 123"),
-        new Pharmacy(32, "Similares Dentista", "Centro 123"),
-        new Pharmacy(55, "Similares Veterinaria", "Colonia Las Flores 45 calle 5 cp 78234")
-    ));
+    @Inject
+    SharedData sharedData;
 
     public List<Pharmacy> getPharmacys() {
         System.out.println("Service - Obteniendo todas las farmacias...");
-        return pharmacys;
+        return sharedData.getPharmacies();
     }
     
     public Pharmacy getPharmacyById(Integer id) {
-        return pharmacys.stream()
+        return sharedData.getPharmacies().stream()
             .filter(p -> p.getIdPharmacy().equals(id))
             .findFirst()
             .orElseThrow(() -> new NotFoundException("La farmacia con ID " + id + " no fue encontrada"));
+    }
+
+    public List<Sale> getSalesByPharmacy(Integer pharmacyId) {
+        System.out.println("Service - Obteniendo ventas para farmacia ID: " + pharmacyId);
+        
+        // Validar que la farmacia existe
+        getPharmacyById(pharmacyId);
+        
+        List<Sale> result = sharedData.getSales().stream()
+            .filter(s -> s.getPharmacyId() != null && s.getPharmacyId().equals(pharmacyId))
+            .collect(Collectors.toList());
+            
+        if (result.isEmpty()) {
+            throw new NotFoundException("No se encontraron ventas para la farmacia con ID " + pharmacyId);
+        }
+        return result;
     }
     
     public Pharmacy createPharmacy(Pharmacy pharmacy) {
@@ -41,9 +55,10 @@ public class PharmacyService {
         if (pharmacy.getIdPharmacy() == null) {
             throw new BadRequestException("El ID de la farmacia es requerido");
         }
-                
-        boolean idExists = pharmacys.stream()
-                .anyMatch(p -> p.getIdPharmacy().equals(pharmacy.getIdPharmacy()));
+
+        boolean idExists = sharedData.getPharmacies().stream()
+        .anyMatch(p -> p.getIdPharmacy().equals(pharmacy.getIdPharmacy()));
+
         if (idExists) {
             throw new AlreadyExistsException("El ID de la farmacia ya existe: " + pharmacy.getIdPharmacy());
         }
@@ -54,7 +69,7 @@ public class PharmacyService {
                 pharmacy.getName(), 
                 pharmacy.getAddress());
                 
-        pharmacys.add(newPharmacy);
+        sharedData.getPharmacies().add(newPharmacy);
         return newPharmacy;
     }
 
@@ -69,9 +84,10 @@ public class PharmacyService {
         // Buscar si la farmacia existe
         Pharmacy existingPharmacy = getPharmacyById(id);
 
-        // Verificar si el nuevo ID ya existe (para otro registro)
-        boolean idExists = pharmacys.stream()
-            .anyMatch(p -> p.getIdPharmacy().equals(pharmacy.getIdPharmacy()) && !p.getIdPharmacy().equals(id));
+        // Verificar si el nuevo ID ya existe
+        boolean idExists = sharedData.getPharmacies().stream()
+        .anyMatch(p -> p.getIdPharmacy().equals(pharmacy.getIdPharmacy()) && !p.getIdPharmacy().equals(id));
+        
         if (idExists) {
             throw new AlreadyExistsException("El ID de la farmacia ya existe: " + pharmacy.getIdPharmacy());
         }
@@ -111,8 +127,16 @@ public class PharmacyService {
         // Verificar que existe antes de eliminar
         getPharmacyById(id);
         
-        // Buscar si la farmacia existe y eliminarla
-        boolean removed = pharmacys.removeIf(p -> p.getIdPharmacy().equals(id));
+        // Validar que no tenga ventas asociadas
+        boolean hasSales = sharedData.getSales().stream()
+            .anyMatch(s -> s.getPharmacyId() != null && s.getPharmacyId().equals(id));
+            
+        if (hasSales) {
+            throw new BadRequestException("No se puede eliminar la farmacia porque tiene ventas asociadas");
+        }
+        
+        // Eliminar la farmacia
+        boolean removed = sharedData.getPharmacies().removeIf(p -> p.getIdPharmacy().equals(id));
         
         if (!removed) {
             throw new NotFoundException("La farmacia con ID " + id + " no fue encontrada");

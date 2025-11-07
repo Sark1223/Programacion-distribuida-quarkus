@@ -45,7 +45,7 @@ import org.hibernate.validator.constraints.*;
   SalePatch.JSON_PROPERTY_TOTAL,
   SalePatch.JSON_PROPERTY_PRODUCTS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T17:58:46.397555300-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T18:47:26.075651800-06:00[America/Mexico_City]")
 public class SalePatch {
   public static final String JSON_PROPERTY_SALE_DATE = "saleDate";
   private OffsetDateTime saleDate;

@@ -4,7 +4,7 @@ info:
   description: API para administrar una farmacia
   version: 1.3.0
   contact:
-    name: RND
+    name: NEXUS TECNM
     email: l22140765@queretaro.tecnm.mx
   license:
     name: Apache 2.0
@@ -21,7 +21,7 @@ tags:
     description: "Administra cada una de las sucursales"
   - name: products
     description: "Administra los productos y sus cantidades"
-  - name: employes
+  - name: employeees
     description: "Administra los empleados" 
   - name: sales
     description: "Administrador de ventas"
@@ -120,8 +120,8 @@ paths:
             schema:
               $ref: '#/components/schemas/pharmacy'
       responses:
-        '201':
-          $ref: '#/components/responses/Success201PharmacyUpdated'
+        '200':
+          $ref: '#/components/responses/Success200PharmacyUpdated'
         '400':
           $ref: '#/components/responses/Error400' 
         '401':
@@ -160,8 +160,8 @@ paths:
               name: "Farmacia la cruz"
               address: "Calle La luz #13" 
       responses:
-        '201':
-          $ref: '#/components/responses/Success201PharmacyPatched'
+        '200':
+          $ref: '#/components/responses/Success200PharmacyPatched'
         '400':
           $ref: '#/components/responses/Error400' 
         '401':
@@ -201,6 +201,33 @@ paths:
           $ref: '#/components/responses/Error404' 
         '500':
           $ref: '#/components/responses/Error500' 
+  /pharmacys/{idPharmacy}/sales:
+      get:
+        summary: Obtiene las ventas por ID de farmacia
+        description: Obtiene ventas por farmacia
+        operationId: getSalesByPharmacy
+        tags:
+          - pharmacys
+        parameters:
+          - name: idPharmacy
+            in: path
+            description: ID de farmacia a obtener ventas
+            required: true
+            schema:
+              type: integer
+              format: int32
+              minimum: 1
+              maximum: 2147483647
+            example: 123
+        responses:
+          '200':
+            $ref: '#/components/responses/Success200SalesByPharmacy'
+          '401':
+            $ref: '#/components/responses/Error401' 
+          '404':
+            $ref: '#/components/responses/Error404' 
+          '500':
+            $ref: '#/components/responses/Error500' 
 
   /products:
     get:
@@ -268,8 +295,8 @@ paths:
             schema:
               $ref: '#/components/schemas/product'
       responses:
-        '201':
-          $ref: '#/components/responses/Success201ProductUpdated'
+        '200':
+          $ref: '#/components/responses/Success200ProductUpdated'
         '400':
           $ref: '#/components/responses/Error400' 
         '401':
@@ -307,8 +334,8 @@ paths:
             example:
               price: 222.44
       responses:
-        '201':
-          $ref: '#/components/responses/Success201ProductPatched'
+        '200':
+          $ref: '#/components/responses/Success200ProductPatched'
         '400':
           $ref: '#/components/responses/Error400' 
         '401':
@@ -349,16 +376,16 @@ paths:
         '500':
           $ref: '#/components/responses/Error500' 
 
-  /employes:
+  /employeees:
     get:
       summary: Obtener todos los empleados
       description: Obtiene todos los datos de los empleados
-      operationId: getEmployes
+      operationId: getemployeees
       tags:
-        - employes
+        - employeees
       responses:
         '200':
-          $ref: '#/components/responses/Success200Employes'
+          $ref: '#/components/responses/Success200employeees'
         '401':
           $ref: '#/components/responses/Error401'
         '404':
@@ -369,18 +396,18 @@ paths:
     post:
       summary: Registrar empleado
       description: Registrar los datos de un nuevo empleado
-      operationId: createEmploye
+      operationId: createEmployee
       tags:
-        - employes
+        - employeees
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/employe'
+              $ref: '#/components/schemas/employee'
       responses:
         '201':
-          $ref: '#/components/responses/Success201EmployeCreated'
+          $ref: '#/components/responses/Success201EmployeeCreated'
         '400':
           $ref: '#/components/responses/Error400' 
         '401':
@@ -390,15 +417,15 @@ paths:
         '500':
           $ref: '#/components/responses/Error500' 
 
-  /employes/{idEmploye}:
+  /employeees/{idEmployee}:
     get:
       summary: Obtener empleado por su ID
       description: Obtiene la informacion de un empleado en especifico
-      operationId: getEmploye
+      operationId: getEmployee
       tags:
-        - employes
+        - employeees
       parameters:
-        - name: idEmploye
+        - name: idEmployee
           in: path
           description: ID de empleado a obtener
           required: true
@@ -410,7 +437,7 @@ paths:
             example: 123
       responses:
         '200':
-          $ref: '#/components/responses/Success200Employe'
+          $ref: '#/components/responses/Success200Employee'
         '401':
           $ref: '#/components/responses/Error401' 
         '404':
@@ -421,11 +448,11 @@ paths:
     put:
       summary: Actualizar datos de un empleado
       description: Actualizar todos los datos de un empleado
-      operationId: updateEmploye
+      operationId: updateEmployee
       tags:
-        - employes
+        - employeees
       parameters:
-        - name: idEmploye
+        - name: idEmployee
           in: path
           description: ID de empleado a actualizar
           required: true
@@ -440,10 +467,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/employe'
+              $ref: '#/components/schemas/employee'
       responses:
-        '201':
-          $ref: '#/components/responses/Success201EmployeUpdated'
+        '200':
+          $ref: '#/components/responses/Success200EmployeeUpdated'
         '400':
           $ref: '#/components/responses/Error400' 
         '401':
@@ -458,11 +485,11 @@ paths:
     patch:
       summary: Actualizar dato de empleado
       description: Actualizar un unico dato de un empleado
-      operationId: patchEmploye
+      operationId: patchEmployee
       tags:
-        - employes
+        - employeees
       parameters:
-        - name: idEmploye
+        - name: idEmployee
           in: path
           description: ID de empleado a actualizar dato
           required: true
@@ -477,13 +504,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/employePatch'
+              $ref: '#/components/schemas/employeePatch'
             example:
               name: "Vartolomeo"
               lastName: "Bell"
       responses:
         '200':
-          $ref: '#/components/responses/Success200EmployePatched'
+          $ref: '#/components/responses/Success200EmployeePatched'
         '400':
           $ref: '#/components/responses/Error400' 
         '401':
@@ -498,11 +525,11 @@ paths:
     delete:
       summary: Eliminar empleado
       description: Elimina empleado
-      operationId: deleteEmploye
+      operationId: deleteEmployee
       tags:
-        - employes
+        - employeees
       parameters:
-        - name: idEmploye
+        - name: idEmployee
           in: path
           description: ID de empleado a eliminar
           required: true
@@ -514,7 +541,7 @@ paths:
             example: 123
       responses:
         '200':
-          $ref: '#/components/responses/Success200EmployeDeleted'
+          $ref: '#/components/responses/Success200EmployeeDeleted'
         '401':
           $ref: '#/components/responses/Error401' 
         '403':
@@ -559,7 +586,7 @@ paths:
               iva: 80.00
               total: 580.00
               pharmacyId: 501
-              employeId: 601
+              employeeId: 601
               products:
                 - productId: 901
                   quantity: 2
@@ -572,34 +599,6 @@ paths:
           $ref: '#/components/responses/Error401' 
         '403':
           $ref: '#/components/responses/Error403' 
-        '500':
-          $ref: '#/components/responses/Error500' 
-
-  /sales/{idPharmacy}:
-    get:
-      summary: Obtiene las ventas por ID de farmacia
-      description: Obtiene ventas por farmacia
-      operationId: getSalesByPharmacy
-      tags:
-        - sales
-      parameters:
-        - name: idPharmacy
-          in: path
-          description: ID de farmacia a obtener ventas
-          required: true
-          schema:
-            type: integer
-            format: int32
-            minimum: 1
-            maximum: 2147483647
-          example: 123
-      responses:
-        '200':
-          $ref: '#/components/responses/Success200SalesByPharmacy'
-        '401':
-          $ref: '#/components/responses/Error401' 
-        '404':
-          $ref: '#/components/responses/Error404' 
         '500':
           $ref: '#/components/responses/Error500' 
 
@@ -628,8 +627,8 @@ paths:
             schema:
               $ref: '#/components/schemas/sale'
       responses:
-        '201':
-          $ref: '#/components/responses/Success201SaleUpdated'
+        '200':
+          $ref: '#/components/responses/Success200SaleUpdated'
         '400':
           $ref: '#/components/responses/Error400' 
         '401':
@@ -671,8 +670,8 @@ paths:
                 - productId: 902
                   quantity: 3
       responses:
-        '201':
-          $ref: '#/components/responses/Success201SalePatched'
+        '200':
+          $ref: '#/components/responses/Success200SalePatched'
         '400':
           $ref: '#/components/responses/Error400' 
         '401':
@@ -754,17 +753,17 @@ components:
           maxLength: 254
           example: "Calle La luz #13"
 
-    employe:
+    employee:
       type: object
       required:
-        - idEmploye
+        - idEmployee
         - idPharmacy
         - name
         - lastName
         - phone
-        - typeEmploye 
+        - typeEmployee 
       properties:
-        idEmploye:
+        idEmployee:
           type: integer
           format: int32
           minimum: 1
@@ -792,13 +791,13 @@ components:
           minLength: 10
           maxLength: 20
           example: "4424568932"
-        typeEmploye:
+        typeEmployee:
           type: string
           enum: [Cajero, Doctor]
           description: Tipo de producto asociado (Cajero, Doctor)
           example: "Cajero"
 
-    employePatch:
+    employeePatch:
       type: object
       properties:
         name:
@@ -846,8 +845,7 @@ components:
           example: "Producto para aliviar el dolor y reducir la fiebre"
         price:
           type: number
-          format: double 
-          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$'
+          format: double
           example: 200.50
 
     productPatch:
@@ -856,7 +854,6 @@ components:
         price:
           type: number
           format: double
-          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$'
           example: 222.44
         description:
           type: string
@@ -869,7 +866,7 @@ components:
         - subTotal
         - iva
         - total
-        - employeId
+        - employeeId
         - pharmacyId 
         - products
       properties:
@@ -886,17 +883,14 @@ components:
         subTotal:
           type: number
           format: double
-          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$'
           example: 22222.10
         iva:
           type: number
           format: double
-          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$' 
           example: 3555.54
         total:
           type: number
           format: double
-          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$' 
           example: 25777.64
         pharmacyId: 
           type: integer
@@ -905,7 +899,7 @@ components:
           minimum: 1
           maximum: 2147483647
           example: 123
-        employeId:
+        employeeId:
           type: integer
           format: int32
           description: ID del empleado que realizó la venta
@@ -928,17 +922,14 @@ components:
         subTotal:
           type: number
           format: double
-          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$'
           example: 22222.10
         iva:
           type: number
           format: double
-          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$'
           example: 3555.54
         total:
           type: number
           format: double
-          pattern: '^[0-9]{1,16}(?:\.[0-9]{1,2})?$'
           example: 25777.64
         products:
           type: array
@@ -1007,7 +998,7 @@ components:
           type: object
           description: Datos de la respuesta
 
-    # --- Esquemas de Error (se mantienen igual) ---
+    # --- Esquemas de Error ---
     Error:
       type: object
       description: Respuesta de error estándar
@@ -1118,7 +1109,7 @@ components:
               code: "PHARMACY_CREATED"
               message: "Farmacia creada exitosamente"
 
-    Success201PharmacyUpdated:
+    Success200PharmacyUpdated:
       description: Farmacia actualizada exitosamente
       content:
         application/json:
@@ -1129,7 +1120,7 @@ components:
               code: "PHARMACY_UPDATED"
               message: "Farmacia actualizada exitosamente"
 
-    Success201PharmacyPatched:
+    Success200PharmacyPatched:
       description: Farmacia actualizada parcialmente exitosamente
       content:
         application/json:
@@ -1185,7 +1176,7 @@ components:
               code: "PRODUCT_CREATED"
               message: "Producto creado exitosamente"
 
-    Success201ProductUpdated:
+    Success200ProductUpdated:
       description: Producto actualizado exitosamente
       content:
         application/json:
@@ -1196,7 +1187,7 @@ components:
               code: "PRODUCT_UPDATED"
               message: "Producto actualizado exitosamente"
 
-    Success201ProductPatched:
+    Success200ProductPatched:
       description: Producto actualizado parcialmente exitosamente
       content:
         application/json:
@@ -1218,8 +1209,8 @@ components:
               code: "PRODUCT_DELETED"
               message: "Producto eliminado exitosamente"
 
-    # Respuestas de éxito para Employes
-    Success200Employes:
+    # Respuestas de éxito para employeees
+    Success200employeees:
       description: Lista de empleados obtenida correctamente
       content:
         application/json:
@@ -1227,23 +1218,23 @@ components:
             allOf:
               - $ref: '#/components/schemas/SuccessWithData'
             example:
-              code: "EMPLOYES_RETRIEVED"
+              code: "employeees_RETRIEVED"
               message: "Lista de empleados obtenida exitosamente"
               data:
-                - idEmploye: 123
+                - idEmployee: 123
                   idPharmacy: 234
                   name: "Bartolomeo"
                   lastName: "Lee"
                   phone: "4424568932"
-                  typeEmploye: "Doctor"
-                - idEmploye: 124
+                  typeEmployee: "Doctor"
+                - idEmployee: 124
                   idPharmacy: 234
                   name: "Pepe"
                   lastName: "Lara"
                   phone: "4424568933"
-                  typeEmploye: "Cajero"
+                  typeEmployee: "Cajero"
 
-    Success200Employe:
+    Success200Employee:
       description: Información del empleado obtenida correctamente
       content:
         application/json:
@@ -1254,14 +1245,14 @@ components:
               code: "EMPLOYE_RETRIEVED"
               message: "Información del empleado obtenida exitosamente"
               data:
-                idEmploye: 123
+                idEmployee: 123
                 idPharmacy: 234
                 name: "Bartolomeo"
                 lastName: "Lee"
                 phone: "4424568932"
-                typeEmploye: "Doctor"
+                typeEmployee: "Doctor"
 
-    Success201EmployeCreated:
+    Success201EmployeeCreated:
       description: Empleado creado exitosamente
       content:
         application/json:
@@ -1272,7 +1263,7 @@ components:
               code: "EMPLOYE_CREATED"
               message: "Empleado creado exitosamente"
 
-    Success201EmployeUpdated:
+    Success200EmployeeUpdated:
       description: Empleado actualizado exitosamente
       content:
         application/json:
@@ -1283,7 +1274,7 @@ components:
               code: "EMPLOYE_UPDATED"
               message: "Empleado actualizado exitosamente"
 
-    Success200EmployePatched:
+    Success200EmployeePatched:
       description: Empleado actualizado parcialmente exitosamente
       content:
         application/json:
@@ -1294,7 +1285,7 @@ components:
               code: "EMPLOYE_PATCHED"
               message: "Empleado actualizado parcialmente exitosamente"
 
-    Success200EmployeDeleted:
+    Success200EmployeeDeleted:
       description: Empleado eliminado exitosamente
       content:
         application/json:
@@ -1323,7 +1314,7 @@ components:
                   iva: 240.08
                   total: 1740.58
                   pharmacyId: 301
-                  employeId: 401
+                  employeeId: 401
                   products: 
                     - saleId: 201
                       productId: 301
@@ -1337,7 +1328,7 @@ components:
                   iva: 160.00
                   total: 1160.00
                   pharmacyId: 302
-                  employeId: 402
+                  employeeId: 402
                   products:
                     - saleId: 202
                       productId: 401
@@ -1360,14 +1351,14 @@ components:
                   iva: 240.08
                   total: 1740.58
                   pharmacyId: 301
-                  employeId: 401
+                  employeeId: 401
                 - saleId: 203
                   saleDate: "2025-12-31T18:12:21Z"
                   subTotal: 500.00
                   iva: 80.00
                   total: 580.00
                   pharmacyId: 301
-                  employeId: 403
+                  employeeId: 403
 
     Success201SaleCreated:
       description: Venta creada exitosamente
@@ -1380,7 +1371,7 @@ components:
               code: "SALE_CREATED"
               message: "Venta creada exitosamente"
 
-    Success201SaleUpdated:
+    Success200SaleUpdated:
       description: Venta actualizada exitosamente
       content:
         application/json:
@@ -1391,7 +1382,7 @@ components:
             code: "SALE_UPDATED"
             message: "Venta actualizada exitosamente"
 
-    Success201SalePatched:
+    Success200SalePatched:
       description: Venta actualizada parcialmente exitosamente
       content:
         application/json:

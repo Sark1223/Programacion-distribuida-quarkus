@@ -32,20 +32,20 @@ import org.hibernate.validator.constraints.*;
 
 
 /**
- * Employe
+ * Employee
  */
 @JsonPropertyOrder({
-  Employe.JSON_PROPERTY_ID_EMPLOYE,
-  Employe.JSON_PROPERTY_ID_PHARMACY,
-  Employe.JSON_PROPERTY_NAME,
-  Employe.JSON_PROPERTY_LAST_NAME,
-  Employe.JSON_PROPERTY_PHONE,
-  Employe.JSON_PROPERTY_TYPE_EMPLOYE
+  Employee.JSON_PROPERTY_ID_EMPLOYEE,
+  Employee.JSON_PROPERTY_ID_PHARMACY,
+  Employee.JSON_PROPERTY_NAME,
+  Employee.JSON_PROPERTY_LAST_NAME,
+  Employee.JSON_PROPERTY_PHONE,
+  Employee.JSON_PROPERTY_TYPE_EMPLOYEE
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
-public class Employe {
-  public static final String JSON_PROPERTY_ID_EMPLOYE = "idEmploye";
-  private Integer idEmploye;
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T18:47:26.075651800-06:00[America/Mexico_City]")
+public class Employee {
+  public static final String JSON_PROPERTY_ID_EMPLOYEE = "idEmployee";
+  private Integer idEmployee;
 
   public static final String JSON_PROPERTY_ID_PHARMACY = "idPharmacy";
   private Integer idPharmacy;
@@ -62,14 +62,14 @@ public class Employe {
   /**
    * Tipo de producto asociado (Cajero, Doctor)
    */
-  public enum TypeEmployeEnum {
+  public enum TypeEmployeeEnum {
     CAJERO("Cajero"),
     
     DOCTOR("Doctor");
 
     private String value;
 
-    TypeEmployeEnum(String value) {
+    TypeEmployeeEnum(String value) {
       this.value = value;
     }
 
@@ -84,8 +84,8 @@ public class Employe {
     }
 
     @JsonCreator
-    public static TypeEmployeEnum fromValue(String value) {
-      for (TypeEmployeEnum b : TypeEmployeEnum.values()) {
+    public static TypeEmployeeEnum fromValue(String value) {
+      for (TypeEmployeeEnum b : TypeEmployeeEnum.values()) {
         if (b.value.equals(value)) {
           return b;
         }
@@ -94,42 +94,42 @@ public class Employe {
     }
   }
 
-  public static final String JSON_PROPERTY_TYPE_EMPLOYE = "typeEmploye";
-  private TypeEmployeEnum typeEmploye;
+  public static final String JSON_PROPERTY_TYPE_EMPLOYEE = "typeEmployee";
+  private TypeEmployeeEnum typeEmployee;
 
-  public Employe() { 
+  public Employee() { 
   }
 
-  public Employe idEmploye(Integer idEmploye) {
-    this.idEmploye = idEmploye;
+  public Employee idEmployee(Integer idEmployee) {
+    this.idEmployee = idEmployee;
     return this;
   }
 
    /**
-   * Get idEmploye
+   * Get idEmployee
    * minimum: 1
    * maximum: 2147483647
-   * @return idEmploye
+   * @return idEmployee
   **/
   @jakarta.annotation.Nonnull
   @NotNull
  @Min(1) @Max(2147483647)
-  @JsonProperty(JSON_PROPERTY_ID_EMPLOYE)
+  @JsonProperty(JSON_PROPERTY_ID_EMPLOYEE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public Integer getIdEmploye() {
-    return idEmploye;
+  public Integer getIdEmployee() {
+    return idEmployee;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ID_EMPLOYE)
+  @JsonProperty(JSON_PROPERTY_ID_EMPLOYEE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setIdEmploye(Integer idEmploye) {
-    this.idEmploye = idEmploye;
+  public void setIdEmployee(Integer idEmployee) {
+    this.idEmployee = idEmployee;
   }
 
 
-  public Employe idPharmacy(Integer idPharmacy) {
+  public Employee idPharmacy(Integer idPharmacy) {
     this.idPharmacy = idPharmacy;
     return this;
   }
@@ -158,7 +158,7 @@ public class Employe {
   }
 
 
-  public Employe name(String name) {
+  public Employee name(String name) {
     this.name = name;
     return this;
   }
@@ -185,7 +185,7 @@ public class Employe {
   }
 
 
-  public Employe lastName(String lastName) {
+  public Employee lastName(String lastName) {
     this.lastName = lastName;
     return this;
   }
@@ -212,7 +212,7 @@ public class Employe {
   }
 
 
-  public Employe phone(String phone) {
+  public Employee phone(String phone) {
     this.phone = phone;
     return this;
   }
@@ -239,35 +239,35 @@ public class Employe {
   }
 
 
-  public Employe typeEmploye(TypeEmployeEnum typeEmploye) {
-    this.typeEmploye = typeEmploye;
+  public Employee typeEmployee(TypeEmployeeEnum typeEmployee) {
+    this.typeEmployee = typeEmployee;
     return this;
   }
 
    /**
    * Tipo de producto asociado (Cajero, Doctor)
-   * @return typeEmploye
+   * @return typeEmployee
   **/
   @jakarta.annotation.Nonnull
   @NotNull
 
-  @JsonProperty(JSON_PROPERTY_TYPE_EMPLOYE)
+  @JsonProperty(JSON_PROPERTY_TYPE_EMPLOYEE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 
-  public TypeEmployeEnum getTypeEmploye() {
-    return typeEmploye;
+  public TypeEmployeeEnum getTypeEmployee() {
+    return typeEmployee;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_TYPE_EMPLOYE)
+  @JsonProperty(JSON_PROPERTY_TYPE_EMPLOYEE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setTypeEmploye(TypeEmployeEnum typeEmploye) {
-    this.typeEmploye = typeEmploye;
+  public void setTypeEmployee(TypeEmployeeEnum typeEmployee) {
+    this.typeEmployee = typeEmployee;
   }
 
 
   /**
-   * Return true if this employe object is equal to o.
+   * Return true if this employee object is equal to o.
    */
   @Override
   public boolean equals(Object o) {
@@ -277,30 +277,30 @@ public class Employe {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Employe employe = (Employe) o;
-    return Objects.equals(this.idEmploye, employe.idEmploye) &&
-        Objects.equals(this.idPharmacy, employe.idPharmacy) &&
-        Objects.equals(this.name, employe.name) &&
-        Objects.equals(this.lastName, employe.lastName) &&
-        Objects.equals(this.phone, employe.phone) &&
-        Objects.equals(this.typeEmploye, employe.typeEmploye);
+    Employee employee = (Employee) o;
+    return Objects.equals(this.idEmployee, employee.idEmployee) &&
+        Objects.equals(this.idPharmacy, employee.idPharmacy) &&
+        Objects.equals(this.name, employee.name) &&
+        Objects.equals(this.lastName, employee.lastName) &&
+        Objects.equals(this.phone, employee.phone) &&
+        Objects.equals(this.typeEmployee, employee.typeEmployee);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(idEmploye, idPharmacy, name, lastName, phone, typeEmploye);
+    return Objects.hash(idEmployee, idPharmacy, name, lastName, phone, typeEmployee);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Employe {\n");
-    sb.append("    idEmploye: ").append(toIndentedString(idEmploye)).append("\n");
+    sb.append("class Employee {\n");
+    sb.append("    idEmployee: ").append(toIndentedString(idEmployee)).append("\n");
     sb.append("    idPharmacy: ").append(toIndentedString(idPharmacy)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
-    sb.append("    typeEmploye: ").append(toIndentedString(typeEmploye)).append("\n");
+    sb.append("    typeEmployee: ").append(toIndentedString(typeEmployee)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -348,9 +348,9 @@ public class Employe {
 
     StringJoiner joiner = new StringJoiner("&");
 
-    // add `idEmploye` to the URL query string
-    if (getIdEmploye() != null) {
-      joiner.add(String.format("%sidEmploye%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getIdEmploye()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    // add `idEmployee` to the URL query string
+    if (getIdEmployee() != null) {
+      joiner.add(String.format("%sidEmployee%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getIdEmployee()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
     // add `idPharmacy` to the URL query string
@@ -373,9 +373,9 @@ public class Employe {
       joiner.add(String.format("%sphone%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getPhone()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
-    // add `typeEmploye` to the URL query string
-    if (getTypeEmploye() != null) {
-      joiner.add(String.format("%stypeEmploye%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getTypeEmploye()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    // add `typeEmployee` to the URL query string
+    if (getTypeEmployee() != null) {
+      joiner.add(String.format("%stypeEmployee%s=%s", prefix, suffix, URLEncoder.encode(String.valueOf(getTypeEmployee()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
     }
 
     return joiner.toString();

@@ -38,7 +38,7 @@ import org.hibernate.validator.constraints.*;
   PharmacyPatch.JSON_PROPERTY_NAME,
   PharmacyPatch.JSON_PROPERTY_ADDRESS
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T18:47:26.075651800-06:00[America/Mexico_City]")
 public class PharmacyPatch {
   public static final String JSON_PROPERTY_NAME = "name";
   private String name;

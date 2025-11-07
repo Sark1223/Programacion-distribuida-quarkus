@@ -40,7 +40,7 @@ import jakarta.validation.constraints.Size;
   Product.JSON_PROPERTY_DESCRIPTION,
   Product.JSON_PROPERTY_PRICE
 })
-@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-04T13:50:12.904429500-06:00[America/Mexico_City]")
+@jakarta.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", date = "2025-11-06T18:47:26.075651800-06:00[America/Mexico_City]")
 public class Product {
   public static final String JSON_PROPERTY_PRODUCT_ID = "productId";
   private Integer productId;
@@ -101,6 +101,7 @@ public class Product {
     this.name = name;
     this.price = price;
   }
+
   public Product productId(Integer productId) {
     this.productId = productId;
     return this;
