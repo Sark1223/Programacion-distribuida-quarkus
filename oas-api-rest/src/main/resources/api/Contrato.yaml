@@ -554,16 +554,14 @@ paths:
             schema:
               $ref: '#/components/schemas/sale'
             example:
-              saleId: 124
-              saleDate: "31/12/2025 17:00:00"
-              subTotal: 1000.00
-              iva: 160.00
-              total: 1160.00
-              pharmacyId: 124
-              employeId: 124
+              saleDate: "2025-12-30T10:00:00Z"
+              subTotal: 500.00
+              iva: 80.00
+              total: 580.00
+              pharmacyId: 501
+              employeId: 601
               products:
-                - saleId: 124
-                  productId: 1
+                - productId: 901
                   quantity: 2
       responses:
         '201':
@@ -670,8 +668,7 @@ paths:
               total: 1160.00
               iva: 160.00
               products:
-                - saleId: 124
-                  productId: 1
+                - productId: 902
                   quantity: 3
       responses:
         '201':
@@ -868,7 +865,6 @@ components:
     sale:
       type: object
       required:
-        - saleId
         - saleDate
         - subTotal
         - iva
@@ -882,14 +878,11 @@ components:
           format: int32
           minimum: 1
           maximum: 2147483647 
-          example: 123
+          example: 201
         saleDate:
           type: string
-          format: date-time 
-          pattern: '^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4} ([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$'
-          minLength: 19
-          maxLength: 19
-          example: "31/12/2025 16:12:21"
+          format: date-time
+          example: "2025-12-31T16:12:21Z"
         subTotal:
           type: number
           format: double
@@ -931,10 +924,7 @@ components:
         saleDate:
           type: string
           format: date-time
-          pattern: '^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\d{4} ([01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]$'
-          minLength: 19
-          maxLength: 19
-          example: "31/12/2025 16:12:21"
+          example: "2025-12-31T16:12:21Z"
         subTotal:
           type: number
           format: double
@@ -958,7 +948,6 @@ components:
     sale-product:
       type: object
       required:
-        - saleId
         - productId
         - quantity
       properties:
@@ -967,7 +956,7 @@ components:
           format: int32
           minimum: 1
           maximum: 2147483647 
-          example: 123
+          example: 201
         productId:
           type: integer
           format: int32
@@ -1328,30 +1317,30 @@ components:
               code: "SALES_RETRIEVED"
               message: "Lista de ventas obtenida exitosamente"
               data:
-                - saleId: 123
-                  saleDate: "31/12/2025 16:12:21"
-                  subTotal: 22222.10
-                  iva: 8.22
-                  total: 22222.10
-                  pharmacyId: 123
-                  employeId: 123
+                - saleId: 201
+                  saleDate: "2025-12-31T16:12:21Z"
+                  subTotal: 1500.50
+                  iva: 240.08
+                  total: 1740.58
+                  pharmacyId: 301
+                  employeId: 401
                   products: 
-                    - saleId: 123
-                      productId: 123
-                      quantity: 10
-                    - saleId: 123
-                      productId: 124
-                      quantity: 5
-                - saleId: 124
-                  saleDate: "31/12/2025 17:00:00"
+                    - saleId: 201
+                      productId: 301
+                      quantity: 3
+                    - saleId: 201
+                      productId: 302
+                      quantity: 1
+                - saleId: 202
+                  saleDate: "2025-12-31T17:00:00Z"
                   subTotal: 1000.00
                   iva: 160.00
                   total: 1160.00
-                  pharmacyId: 124
-                  employeId: 124
+                  pharmacyId: 302
+                  employeId: 402
                   products:
-                    - saleId: 124
-                      productId: 1
+                    - saleId: 202
+                      productId: 401
                       quantity: 2
 
     Success200SalesByPharmacy:
@@ -1365,20 +1354,20 @@ components:
               code: "SALES_BY_PHARMACY_RETRIEVED"
               message: "Ventas por farmacia obtenidas exitosamente"
               data:
-                - saleId: 123
-                  saleDate: "31/12/2025 16:12:21"
-                  subTotal: 22222.10
-                  iva: 8.22
-                  total: 22222.10
-                  pharmacyId: 123
-                  employeId: 123
-                - saleId: 125
-                  saleDate: "31/12/2025 18:12:21"
+                - saleId: 201
+                  saleDate: "2025-12-31T16:12:21Z"
+                  subTotal: 1500.50
+                  iva: 240.08
+                  total: 1740.58
+                  pharmacyId: 301
+                  employeId: 401
+                - saleId: 203
+                  saleDate: "2025-12-31T18:12:21Z"
                   subTotal: 500.00
                   iva: 80.00
                   total: 580.00
-                  pharmacyId: 123
-                  employeId: 123
+                  pharmacyId: 301
+                  employeId: 403
 
     Success201SaleCreated:
       description: Venta creada exitosamente
