@@ -69,7 +69,7 @@ public class Pharmacy {
   **/
   @jakarta.annotation.Nonnull
   @NotNull
- @Min(1) @Max(2147483647)
+ @Min(1) @Max(99)
   @JsonProperty(JSON_PROPERTY_ID_PHARMACY)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
 

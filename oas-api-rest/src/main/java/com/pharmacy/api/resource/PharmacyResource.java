@@ -91,7 +91,7 @@ public class PharmacyResource {
     @Path("/pharmacys")
     public Response createPharmacy(@Valid Pharmacy pharmacyRequest) {
         System.out.println("Controller - Creando farmacia: " + pharmacyRequest);
-        
+
         // Las validaciones y excepciones son manejadas automáticamente por el GlobalExceptionMapper
         Pharmacy savedPharmacy = pharmacyService.createPharmacy(pharmacyRequest);
         
