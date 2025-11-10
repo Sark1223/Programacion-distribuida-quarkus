@@ -5,70 +5,70 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import com.pharmacy.api.commons.NotFoundException;
-import com.pharmacy.api.model.Employee;
-import com.pharmacy.api.model.Employee.TypeEmployeeEnum;
-import com.pharmacy.api.model.EmployeePatch; 
+import com.pharmacy.api.commons.AlreadyExistsException;
+import com.pharmacy.api.model.Employe;
+import com.pharmacy.api.model.Employe.TypeEmployeEnum;
+import com.pharmacy.api.model.EmployePatch; 
 
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class EmployeesService {
+public class EmployesService {
 
     // 1. Simulación de la base de datos (datos de prueba iniciales)
-    private List<Employee> employes = new ArrayList<>(Arrays.asList(
-        new Employee()
-            .idEmployee(101)
+    private List<Employe> employes = new ArrayList<>(Arrays.asList(
+        new Employe()
+            .idEmploye(101)
             .idPharmacy(3) 
             .name("Juan")
             .lastName("Perez")
             .phone("4421234567")
-            .typeEmployee(TypeEmployeeEnum.CAJERO),
+            .typeEmploye(TypeEmployeEnum.CAJERO),
             
-        new Employee()
-            .idEmployee(102)
+        new Employe()
+            .idEmploye(102)
             .idPharmacy(1)
             .name("Maria")
             .lastName("Gomez")
             .phone("4427654321")
-            .typeEmployee(TypeEmployeeEnum.DOCTOR),
+            .typeEmploye(TypeEmployeEnum.DOCTOR),
             
-        new Employee()
-            .idEmployee(201)
+        new Employe()
+            .idEmploye(201)
             .idPharmacy(2)
             .name("Carlos")
             .lastName("Hernandez")
             .phone("5551112233")
-            .typeEmployee(TypeEmployeeEnum.CAJERO)
+            .typeEmploye(TypeEmployeEnum.CAJERO)
     ));
     
     // --- LECTURA (GET) ---
 
-    public List<Employee> getEmployees() {
+    public List<Employe> getEmployes() {
         System.out.println("Service - Buscando todos los empleados...");
         return employes;
     }
     
-    public Employee getEmployee(Integer id) {
+    public Employe getEmploye(Integer id) {
         System.out.println("Service - Buscando empleado por ID: " + id);
         return employes.stream()
-            .filter(e -> e.getIdEmployee().equals(id))
+            .filter(e -> e.getIdEmploye().equals(id))
             .findFirst()
-            .orElseThrow(() -> new NotFoundException("El empleado con ID " + id + " no fue encontrado."));
+            .orElseThrow(() -> new AlreadyExistsException("El empleado con ID " + id + " no fue encontrado."));
     }
 
     // --- CREACIÓN (POST) ---
     
-    public Employee createEmployee(Employee employe) {
+    public Employe createEmploye(Employe employe) {
         System.out.println("Service - Creando empleado: " + employe);
         
         // 2. Validación de regla de negocio: El ID del empleado no debe existir
         boolean idExists = employes.stream()
-            .anyMatch(e -> e.getIdEmployee().equals(employe.getIdEmployee()));
+            .anyMatch(e -> e.getIdEmploye().equals(employe.getIdEmploye()));
             
         if (idExists) {
             // Lanza una excepción para indicar conflicto (409) o bad request (400)
-            throw new NotFoundException("El ID del empleado ya existe: " + employe.getIdEmployee());
+            throw new AlreadyExistsException("El ID del empleado ya existe: " + employe.getIdEmploye());
         }
 
         // Simula la "inserción" y devuelve el objeto completo
@@ -78,74 +78,74 @@ public class EmployeesService {
 
     // --- REEMPLAZO TOTAL (PUT) ---
 
-    public Employee updateEmployee(Integer id, Employee employeRequest) {
+    public Employe updateEmploye(Integer id, Employe employeRequest) {
         System.out.println("Service - Actualizando empleado ID " + id + ": " + employeRequest);
         
-        Optional<Employee> existingEmployeeOpt = employes.stream()
-            .filter(e -> e.getIdEmployee().equals(id))
+        Optional<Employe> existingEmployeOpt = employes.stream()
+            .filter(e -> e.getIdEmploye().equals(id))
             .findFirst();
             
-        if (existingEmployeeOpt.isPresent()) {
+        if (existingEmployeOpt.isPresent()) {
             // Actualización (simulando que la DB hace el cambio)
-            Employee existingEmployee = existingEmployeeOpt.get();
+            Employe existingEmploye = existingEmployeOpt.get();
             
             // Reemplazo total de los campos
-            existingEmployee.setName(employeRequest.getName());
-            existingEmployee.setLastName(employeRequest.getLastName());
-            existingEmployee.setPhone(employeRequest.getPhone());
-            existingEmployee.setTypeEmployee(employeRequest.getTypeEmployee());
-            existingEmployee.setIdPharmacy(employeRequest.getIdPharmacy()); // Actualiza la FK también
+            existingEmploye.setName(employeRequest.getName());
+            existingEmploye.setLastName(employeRequest.getLastName());
+            existingEmploye.setPhone(employeRequest.getPhone());
+            existingEmploye.setTypeEmploye(employeRequest.getTypeEmploye());
+            existingEmploye.setIdPharmacy(employeRequest.getIdPharmacy()); // Actualiza la FK también
             
-            return existingEmployee;
+            return existingEmploye;
         } else {
             // Lanza la excepción sugerida para un 404
-            throw new NotFoundException("El empleado con ID " + id + " no fue encontrado para actualizar.");
+            throw new AlreadyExistsException("El empleado con ID " + id + " no fue encontrado para actualizar.");
         }
     }
 
     // --- ACTUALIZACIÓN PARCIAL (PATCH) ---
-    // NOTA: Esta versión asume que tienes una clase EmployeePatch.java
-    public Employee patchEmployee(Integer id, EmployeePatch employePatch) {
+    // NOTA: Esta versión asume que tienes una clase EmployePatch.java
+    public Employe patchEmploye(Integer id, EmployePatch employePatch) {
         System.out.println("Service - Actualizando parcialmente empleado ID " + id + ": " + employePatch);
         
-        Optional<Employee> existingEmployeeOpt = employes.stream()
-            .filter(e -> e.getIdEmployee().equals(id))
+        Optional<Employe> existingEmployeOpt = employes.stream()
+            .filter(e -> e.getIdEmploye().equals(id))
             .findFirst();
             
-        if (existingEmployeeOpt.isPresent()) {
-            Employee existingEmployee = existingEmployeeOpt.get();
+        if (existingEmployeOpt.isPresent()) {
+            Employe existingEmploye = existingEmployeOpt.get();
             
             // Aplicar solo los cambios que no son null
             if (employePatch.getName() != null) {
-                existingEmployee.setName(employePatch.getName());
+                existingEmploye.setName(employePatch.getName());
             }
             if (employePatch.getLastName() != null) {
-                existingEmployee.setLastName(employePatch.getLastName());
+                existingEmploye.setLastName(employePatch.getLastName());
             }
             if (employePatch.getPhone() != null) {
-                existingEmployee.setPhone(employePatch.getPhone());
+                existingEmploye.setPhone(employePatch.getPhone());
             }
 
-            return existingEmployee;
+            return existingEmploye;
         } else {
             // Lanza la excepción sugerida para un 404
-            throw new NotFoundException("El empleado con ID " + id + " no fue encontrado para actualización parcial.");
+            throw new AlreadyExistsException("El empleado con ID " + id + " no fue encontrado para actualización parcial.");
         }
     }
 
     // --- ELIMINACIÓN (DELETE) ---
 
-    public String deleteEmployee(Integer id) {
+    public String deleteEmploye(Integer id) {
         System.out.println("Service - Eliminando empleado ID: " + id);
         
         // Retorna true si un elemento fue eliminado
-        boolean removed = employes.removeIf(e -> e.getIdEmployee().equals(id));
+        boolean removed = employes.removeIf(e -> e.getIdEmploye().equals(id));
         
         if (removed) {
             return "Empleado con ID " + id + " eliminado correctamente";
         } else {
             // Lanza la excepción sugerida para un 404
-            throw new NotFoundException("El empleado con ID " + id + " no fue encontrado para eliminar.");
+            throw new AlreadyExistsException("El empleado con ID " + id + " no fue encontrado para eliminar.");
         }
     }
 }
