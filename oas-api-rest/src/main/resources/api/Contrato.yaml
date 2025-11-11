@@ -21,7 +21,7 @@ tags:
     description: "Administra cada una de las sucursales"
   - name: products
     description: "Administra los productos y sus cantidades"
-  - name: employeees
+  - name: employees
     description: "Administra los empleados" 
   - name: sales
     description: "Administrador de ventas"
@@ -376,16 +376,16 @@ paths:
         '500':
           $ref: '#/components/responses/Error500' 
 
-  /employeees:
+  /employees:
     get:
       summary: Obtener todos los empleados
       description: Obtiene todos los datos de los empleados
-      operationId: getemployeees
+      operationId: getemployees
       tags:
-        - employeees
+        - employees
       responses:
         '200':
-          $ref: '#/components/responses/Success200employeees'
+          $ref: '#/components/responses/Success200employees'
         '401':
           $ref: '#/components/responses/Error401'
         '404':
@@ -398,7 +398,7 @@ paths:
       description: Registrar los datos de un nuevo empleado
       operationId: createEmployee
       tags:
-        - employeees
+        - employees
       requestBody:
         required: true
         content:
@@ -417,13 +417,13 @@ paths:
         '500':
           $ref: '#/components/responses/Error500' 
 
-  /employeees/{idEmployee}:
+  /employees/{idEmployee}:
     get:
       summary: Obtener empleado por su ID
       description: Obtiene la informacion de un empleado en especifico
       operationId: getEmployee
       tags:
-        - employeees
+        - employees
       parameters:
         - name: idEmployee
           in: path
@@ -450,7 +450,7 @@ paths:
       description: Actualizar todos los datos de un empleado
       operationId: updateEmployee
       tags:
-        - employeees
+        - employees
       parameters:
         - name: idEmployee
           in: path
@@ -487,7 +487,7 @@ paths:
       description: Actualizar un unico dato de un empleado
       operationId: patchEmployee
       tags:
-        - employeees
+        - employees
       parameters:
         - name: idEmployee
           in: path
@@ -527,7 +527,7 @@ paths:
       description: Elimina empleado
       operationId: deleteEmployee
       tags:
-        - employeees
+        - employees
       parameters:
         - name: idEmployee
           in: path
@@ -1209,8 +1209,8 @@ components:
               code: "PRODUCT_DELETED"
               message: "Producto eliminado exitosamente"
 
-    # Respuestas de éxito para employeees
-    Success200employeees:
+    # Respuestas de éxito para employees
+    Success200employees:
       description: Lista de empleados obtenida correctamente
       content:
         application/json:
@@ -1218,7 +1218,7 @@ components:
             allOf:
               - $ref: '#/components/schemas/SuccessWithData'
             example:
-              code: "employeees_RETRIEVED"
+              code: "EMPLOYEES_RETRIEVED"
               message: "Lista de empleados obtenida exitosamente"
               data:
                 - idEmployee: 123
